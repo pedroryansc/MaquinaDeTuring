@@ -29,7 +29,7 @@ public class Estado {
 		return transicoes;
 	}
 	
-	public Estado addTransicao(char simboloLido, String estado, char simboloGravado, char direcao) {
+	public Estado addTransicao(char simboloLido, String estado, char simboloGravado, boolean direcao) {
 		transicoes.put(simboloLido, new Transicao(estado, simboloGravado, direcao));
 		return this;
 	}

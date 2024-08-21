@@ -4,9 +4,9 @@ public class Transicao {
 
 	private String estado;
 	private char simbolo;
-	private char direcao;
+	private boolean direcao;
 	
-	public Transicao(String estado, char simbolo, char direcao) {
+	public Transicao(String estado, char simbolo, boolean direcao) {
 		setEstado(estado);
 		setSimbolo(simbolo);
 		setDirecao(direcao);
@@ -28,11 +28,11 @@ public class Transicao {
 		this.simbolo = simbolo;
 	}
 	
-	public char getDirecao() {
+	public boolean getDirecao() {
 		return direcao;
 	}
 	
-	public void setDirecao(char direcao) {
+	public void setDirecao(boolean direcao) {
 		this.direcao = direcao;
 	}
 
