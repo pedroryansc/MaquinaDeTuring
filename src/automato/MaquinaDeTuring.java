@@ -3,6 +3,12 @@ package automato;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Classe utilizada para estruturar uma Máquina de Turing (MT) e verificar se uma cadeia pertence à linguagem reconhecida pela MT.
+ * 
+ * @author Pedro Ryan Coelho Iplinski
+ */
+
 public class MaquinaDeTuring {
 
 	private String linguagem;
@@ -14,6 +20,11 @@ public class MaquinaDeTuring {
 	private char simboloBranco;
 	private List<String> estadosFinais = new ArrayList<String>();
 
+	/**
+	 * 
+	 * @param simboloBranco Símbolo que compõe as extremidades da fita da Máquina de Turing
+	 */
+	
 	public MaquinaDeTuring(char simboloBranco) {
 		setSimboloBranco(simboloBranco);
 	}
@@ -26,7 +37,7 @@ public class MaquinaDeTuring {
 	public String getLinguagem() {
 		return linguagem;
 	}
-
+	
 	public MaquinaDeTuring setLinguagem(String linguagem) {
 		this.linguagem = linguagem;
 		return this;
@@ -142,13 +153,11 @@ public class MaquinaDeTuring {
 		
 		if(gerarID) {
 			id = "(";
-			
 			for(int i = 0; i < fita.length; i++) {
 				if(i == 1)
 					id += "\033[1m" + estadoAtual.getNome() + "\033[0m";
 				id += fita[i];
 			}
-			
 			id += ")";
 		}
 		
@@ -174,16 +183,13 @@ public class MaquinaDeTuring {
 			
 			if(gerarID) {
 				id += " -> (";
-				
 				for(int i = 0; i < fita.length; i++) {
 					if(i == posicao)
 						id += "\033[1m" + estadoAtual.getNome() + "\033[0m";
 					id += fita[i];
 				}
-				
 				if(posicao == fita.length)
 					id += "\033[1m" + estadoAtual.getNome() + "\033[0m";
-				
 				id += ")";
 			}
 		}
