@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Classe utilizada para estruturar uma Máquina de Turing (MT) e verificar se uma cadeia pertence à linguagem reconhecida pela MT.
+ * Classe utilizada para estruturar uma Máquina de Turing (MT) e verificar se uma cadeia pertence ou não à linguagem reconhecida pela MT.
  * 
  * @author Pedro Ryan Coelho Iplinski
  */
@@ -21,28 +21,55 @@ public class MaquinaDeTuring {
 	private List<String> estadosFinais = new ArrayList<String>();
 
 	/**
+	 * Cria uma Máquina de Turing definindo seu símbolo branco.
 	 * 
-	 * @param simboloBranco Símbolo que compõe as extremidades da fita da Máquina de Turing
+	 * @param simboloBranco Símbolo que compõe as extremidades da fita da MT
 	 */
 	
 	public MaquinaDeTuring(char simboloBranco) {
 		setSimboloBranco(simboloBranco);
 	}
 	
+	/**
+	 * Cria uma Máquina de Turing definindo a expressão da linguagem reconhecida e seu símbolo branco.
+	 * 
+	 * @param linguagem Expressão da linguagem reconhecida pela MT
+	 * @param simboloBranco Símbolo que compõe as extremidades da fita da MT
+	 */
+	
 	public MaquinaDeTuring(String linguagem, char simboloBranco) {
 		setLinguagem(linguagem);
 		setSimboloBranco(simboloBranco);
 	}
 
+	/**
+	 * Retorna a expressão que representa a linguagem formal reconhecida pela Máquina de Turing.
+	 * 
+	 * @return a expressão da linguagem reconhecida pela MT (ou null caso não tenha sido definida)
+	 */
+	
 	public String getLinguagem() {
 		return linguagem;
 	}
+	
+	/**
+	 * Define a expressão que representa a linguagem formal reconhecida pela Máquina de Turing.
+	 * 
+	 * @param linguagem Expressão da linguagem reconhecida pela MT
+	 * @return o objeto da MT
+	 */
 	
 	public MaquinaDeTuring setLinguagem(String linguagem) {
 		this.linguagem = linguagem;
 		return this;
 	}
 
+	/**
+	 * Retorna uma lista com os nomes dos estados da Máquina de Turing.
+	 * 
+	 * @return uma lista com os nomes dos estados da MT
+	 */
+	
 	public List<String> getEstados() {
 		List<String> est = new ArrayList<String>();
 		for(Estado estado : estados)
@@ -50,11 +77,24 @@ public class MaquinaDeTuring {
 		return est;
 	}
 	
+	/**
+	 * Cria um novo estado e o adiciona ao conjunto de estados da Máquina de Turing.
+	 * 
+	 * @param nome Nome do estado
+	 * @return o objeto do estado criado
+	 */
+	
 	public Estado addEstado(String nome) {
 		Estado estado = new Estado(nome);
 		estados.add(estado);
 		return estado;
 	}
+	
+	/**
+	 * A partir das transições criadas, retorna a lista dos símbolos de entrada da Máquina de Turing.
+	 * 
+	 * @return a lista que contém os símbolos de entrada da MT
+	 */
 	
 	public List<Character> getSimbolosEntrada(){
 		for(Estado estado : estados) {
@@ -67,6 +107,12 @@ public class MaquinaDeTuring {
 		return simbolosEntrada;
 	}
 	
+	/**
+	 * A partir das transições criadas, retorna a lista dos símbolos da fita da Máquina de Turing.
+	 * 
+	 * @return a lista que contém os símbolos da fita da MT, na qual também estão contidos os símbolos de entrada
+	 */
+	
 	public List<Character> getSimbolosFita(){
 		for(Estado estado : estados) {
 			for(char simbolo : estado.getTransicoes().keySet()) {
@@ -76,6 +122,12 @@ public class MaquinaDeTuring {
 		}
 		return simbolosFita;
 	}
+	
+	/**
+	 * Retorna a lista das definições formais das transições da Máquina de Turing.
+	 * 
+	 * @return a lista que contém as definições formais das transições da MT
+	 */
 	
 	public List<String> getFuncaoTransicao(){
 		for(Estado estado : estados) {
@@ -93,23 +145,55 @@ public class MaquinaDeTuring {
 		return funcaoTransicao;
 	}
 	
+	/**
+	 * Retorna o nome do estado inicial da Máquina de Turing.
+	 * 
+	 * @return o nome do estado inicial da MT
+	 */
+	
 	public String getEstadoInicial() {
 		return estadoInicial.getNome();
 	}
+	
+	/**
+	 * Define o estado inicial da Máquina de Turing.
+	 * 
+	 * @param estadoInicial Objeto do estado inicial da MT
+	 * @return o objeto da MT
+	 */
 
 	public MaquinaDeTuring setEstadoInicial(Estado estadoInicial) {
 		this.estadoInicial = estadoInicial;
 		return this;
 	}
 	
+	/**
+	 * Retorna o símbolo branco da Máquina de Turing.
+	 * 
+	 * @return o símbolo que compõe as extremidades da fita da MT
+	 */
+	
 	public char getSimboloBranco() {
 		return simboloBranco;
 	}
 
+	/**
+	 * Define o símbolo branco da Máquina de Turing.
+	 * 
+	 * @param simboloBranco Símbolo que compõe as extremidades da fita da MT
+	 * @return o objeto da MT
+	 */
+	
 	public MaquinaDeTuring setSimboloBranco(char simboloBranco) {
 		this.simboloBranco = simboloBranco;
 		return this;
 	}
+	
+	/**
+	 * A partir dos estados criados, retorna a lista com os nomes dos estados finais da Máquina de Turing.
+	 * 
+	 * @return a lista que contém os nomes dos estados finais da MT
+	 */
 	
 	public List<String> getEstadosFinais(){
 		for(Estado estado : estados) {
@@ -120,6 +204,14 @@ public class MaquinaDeTuring {
 		}
 		return estadosFinais;
 	}
+	
+	/**
+	 * A partir da cadeia passada como parâmetro, monta a fita utilizada para verificar se a cadeia
+	 * pertence ou não à linguagem da Máquina de Turing.
+	 * 
+	 * @param cadeia Cadeia a ser analisada
+	 * @return o vetor de caracteres da fita
+	 */
 	
 	private char[] montarFita(String cadeia) {
 		char[] vetorCadeia = cadeia.toCharArray();
@@ -135,6 +227,14 @@ public class MaquinaDeTuring {
 		
 		return fita;
 	}
+	
+	/**
+	 * Executa a leitura da cadeia para verificar se ela pertence ou não à linguagem da Máquina de Turing.
+	 * 
+	 * @param cadeia Cadeia a ser analisada
+	 * @param gerarID Valor booleano que indica se deve ser gerada a Descrição Instantânea (ID) que representa a fita ao longo da leitura
+	 * @return a ID da verificação caso o valor de gerarID for verdadeiro. Caso contrário, retorna "true" se a cadeia for aceita ou "false" se não for
+	 */
 	
 	private String leituraCadeia(String cadeia, boolean gerarID) {
 		
@@ -209,6 +309,13 @@ public class MaquinaDeTuring {
 		}
 	}
 	
+	/**
+	 * Verifica se a cadeia pertence ou não à linguagem da Máquina de Turing.
+	 * 
+	 * @param cadeia Cadeia a ser analisada
+	 * @return true se a cadeia for aceita ou false se não for
+	 */
+	
 	public boolean verificarCadeia(String cadeia) {
 		String resultado = leituraCadeia(cadeia, false);
 		
@@ -217,6 +324,14 @@ public class MaquinaDeTuring {
 		else
 			return false;
 	}
+	
+	/**
+	 * Gera a Descrição Instantânea (ID) que representa a fita ao longo da análise da cadeia,
+	 * análise que verifica se a cadeia pertence ou não à linguagem da Máquina de Turing.
+	 * 
+	 * @param cadeia Cadeia a ser analisada
+	 * @return a ID da verificação
+	 */
 	
 	public String gerarID(String cadeia) {
 		return leituraCadeia(cadeia, true);
