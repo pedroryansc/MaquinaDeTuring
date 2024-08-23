@@ -1,4 +1,4 @@
-package automato;
+package com.iplinski.automato;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,6 +6,7 @@ import java.util.List;
 /**
  * Classe utilizada para estruturar uma Máquina de Turing (MT) e verificar se uma cadeia pertence ou não à linguagem reconhecida pela MT.
  * 
+ * @version 1.0
  * @author Pedro Ryan Coelho Iplinski
  */
 
@@ -148,11 +149,14 @@ public class MaquinaDeTuring {
 	/**
 	 * Retorna o nome do estado inicial da Máquina de Turing.
 	 * 
-	 * @return o nome do estado inicial da MT
+	 * @return o nome do estado inicial da MT (ou null caso não tenha sido definido)
 	 */
 	
 	public String getEstadoInicial() {
-		return estadoInicial.getNome();
+		if(estadoInicial != null)
+			return estadoInicial.getNome();
+		else
+			return null;
 	}
 	
 	/**
